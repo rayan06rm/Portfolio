@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rayan REMILI - Portfolio</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" ></link>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" ></link>
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" ></link>
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: rgb(82, 99, 255);
+      --bg-dark: rgb(31, 31, 31);
+      --text-color: rgb(135, 135, 138);
+      --bg-light: rgb(240, 242, 255);
+      --text-light: rgb(40, 40, 40);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-color);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body.light {
+      background: var(--bg-light);
+      color: var(--text-light);
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1.2rem 2rem;
+      background: inherit;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      backdrop-filter: saturate(180%) blur(10px);
+      transition: box-shadow 0.3s ease;
+    }
+
+    header.scrolled {
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    header h1 {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--primary);
+    }
+
+    header .bx {
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--primary);
+      transition: color 0.3s ease;
+    }
+
+    header a {
+      text-decoration: none;
+    }
+
+    section {
+      padding: 6rem 2rem 4rem;
+      max-width: 1000px;
+      margin: 0 auto 3rem;
+      flex: 1;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-top: 5rem;
+      gap: 1rem;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .hero p {
+      max-width: 600px;
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .buttons a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      transition: 0.3s;
+      box-shadow: 0 4px 15px rgba(82, 99, 255, 0.4);
+    }
+
+    .buttons a:hover {
+      background: white;
+      color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(82, 99, 255, 0.6);
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary);
+      user-select: none;
+    }
+
+    .section-title .bx {
+      font-size: 2.5rem;
+      color: var(--primary);
+    }
+
+    .project-list, .skills-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: var(--text-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer; /* ajoute un curseur pour montrer que c’est interactif */
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(82, 99, 255, 0.1), transparent 70%);
+  transform: rotate(25deg);
+  transition: top 0.6s ease, left 0.6s ease, opacity 0.6s ease;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.card:hover::before {
+  top: -25%;
+  left: -25%;
+  opacity: 1;
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(82, 99, 255, 0.4);
+  z-index: 1;
+}
+
+body.light .card {
+  background: #fff;
+  border: 1px solid #ddd;
+  color: var(--text-light);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--primary);
+  position: relative;
+  z-index: 2; /* s’assurer que le texte reste au-dessus de l’effet */
+}
+
+.card p {
+  font-size: 1rem;
+  line-height: 1.5;
+  opacity: 0.85;
+  position: relative;
+  z-index: 2; /* pareil */
+}
+
+
+    footer {
+    background: #101010;
+    color: #bfd7ff;
+    padding: 2rem 1.5rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    user-select: none;
+    letter-spacing: 0.05em;
+  }
+
+  body.light footer {
+    background: #e0e0ff;
+    color: #333;
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .footer-left, .footer-center, .footer-right {
+    flex: 1 1 250px;
+  }
+
+  .footer-left h3 {
+    color: var(--primary);
+    margin-bottom: 0.3rem;
+  }
+
+  .footer-center nav a {
+    color: inherit;
+    text-decoration: none;
+    margin-right: 1.2rem;
+    transition: color 0.3s ease;
+  }
+
+  .footer-center nav a:hover {
+    color: var(--primary);
+  }
+
+  .footer-right p {
+    margin-bottom: 0.5rem;
+  }
+
+  .social-icons a {
+    color: inherit;
+    margin-right: 1rem;
+    font-size: 1.3rem;
+    transition: color 0.3s ease;
+  }
+
+  .social-icons a:hover {
+    color: var(--primary);
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .footer-container {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .footer-left, .footer-center, .footer-right {
+      flex: unset;
+      margin-bottom: 1rem;
+    }
+  }
+
+    /* CONTACT FORM STYLES */
+    .contact-form {
+      max-width: 600px;
+      margin: 2rem auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      background: rgba(255,255,255,0.1);
+      color: inherit;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      resize: vertical;
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: #969393;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      background: rgba(255,255,255,0.2);
+      box-shadow: 0 0 0 2px var(--primary);
+      color: var(--text-light);
+    }
+
+    .contact-form button {
+      align-self: flex-start;
+      padding: 0.75rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(82, 99, 255, 0.5);
+    }
+
+    .contact-form button:hover {
+      background: white;
+      color: var(--primary);
+      box-shadow: 0 8px 25px rgba(82, 99, 255, 0.7);
+    }
+
+    /* Section À propos avec photo stylée */
+    #about {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      max-width: 800px;
+      margin: 0 auto 4rem;
+      padding-top: 2rem;
+    }
+
+    #about-content {
+      max-width: 600px;
+      text-align: center;
+      font-size: 1.1rem;
+      line-height: 1.5;
+      position: relative;
+      color: var(--text-color);
+    }
+
+    #about-photo {
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--primary);
+      box-shadow: 0 0 15px var(--primary);
+      filter: drop-shadow(0 4px 4px rgba(0,0,0,0.15));
+      cursor: default;
+    }
+
+    /* Petits détails stylés sous le texte */
+    #about-content::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: var(--primary);
+      margin: 1.5rem auto 0;
+      border-radius: 2px;
+      opacity: 0.8;
+      transition: width 0.3s ease;
+    }
+
+    #about-content:hover::after {
+      width: 100px;
+    }
+
+    /* Responsive pour about */
+    @media (max-width: 1024px) {
+  .hero h2 {
+    font-size: 2.5rem;
+  }
+  .section-title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 1rem;
+  }
+
+  .hero h2 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .buttons a {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  section {
+    padding: 5rem 1rem 3rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .contact-form {
+    padding: 0 1rem;
+  }
+
+  .footer-center nav a {
+    display: block;
+    margin: 0.3rem 0;
+  }
+
+  .footer-container {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h2 {
+    font-size: 1.6rem;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .buttons a {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .section-title {
+    flex-direction: column;
+    font-size: 1.5rem;
+  }
+
+  .card h3 {
+    font-size: 1.2rem;
+  }
+
+  .card p {
+    font-size: 0.95rem;
+  }
+}
+  </style>
+</head>
+<body>
+  <header id="header">
+    <a href="index.html"><h1>Rayan</h1></a>
+    <i id="theme-toggle" class="bx bx-moon"></i>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <h2>Bonjour, je suis <span style="color: var(--primary)">Rayan REMILI</span></h2>
+      <p>Développeur passionné & Créateur de solutions modernes</p>
+      <div class="buttons">
+        <a href="cv-rayan-remili.pdf" download="Rayan_REMILI_CV.pdf">
+          <i class="bx bx-download"></i> Télécharger mon CV
+        </a>
+        <a href="#about" style="background: transparent; color: var(--primary); border: 2px solid var(--primary); box-shadow: none;">
+          À propos de moi
+        </a>
+      </div>
+    </section>
+
+    <section id="about" aria-label="À propos de Rayan Remili">
+      <div id="about-content">
+        <h2 class="section-title">
+          <i class="bx bx-user"></i> À propos
+        </h2>
+        <p>
+          Étudiant en informatique à l’ESTIN Béjaïa, je suis passionné par la programmation et le développement de projets innovants. Rigoureux et motivé, je cherche à mettre mes compétences au service de solutions efficaces tout en continuant à apprendre et évoluer.
+        </p>
+      </div>
+      <img id="about-photo" src="ProfilePicture.jpg" alt="Photo de Rayan Remili" />
+    </section>
+
+    <section id="skills" aria-label="Compétences">
+      <h2 class="section-title"><i class="bx bx-code-alt"></i> Compétences techniques</h2>
+      <div class="skills-list">
+        <div class="card" style="background: #7b68ee50;">
+          <h3>Développement Web (HTML, CSS)</h3>
+          <p>Je maîtrise les langages HTML et CSS pour créer des sites web modernes, bien structurés, responsives et esthétiques. Je porte une attention particulière à l’ergonomie et à l’expérience utilisateur.</p>
+        </div>
+        <div class="card" style="background: #7b68ee50;">
+          <h3>Programmation en C & Algorithmique</h3>
+          <p>Je maîtrise le langage C ainsi que les concepts fondamentaux de l’algorithmique. Je sais concevoir des solutions efficaces à des problèmes complexes, structurer mon code proprement et optimiser mes programmes grâce à une bonne logique de raisonnement.</p>
+        </div>
+        <div class="card" style="background: #7b68ee50;">
+          <h3>Design UI/UX</h3>
+          <p>J’ai un œil pour le design propre et épuré, et je sais créer des interfaces attrayantes qui offrent une bonne expérience utilisateur sur mobile et web.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" aria-label="Expérience">
+      <h2 class="section-title"><i class="bx bx-briefcase-alt-2"></i> Expérience</h2>
+      <div class="project-list">
+        <div class="card" style="background: #7b68ee50;">
+          <h3>NextStage — <i>Fondateur</i></h3>
+          <p>Plateforme d’accompagnement pour les étudiants algériens dans leur procédure Campus France (TCF, boîte Pastel, universités, entretien, visa). Interface moderne, ressources utiles, et support personnalisé.</p>
+        </div>
+        <div class="card" style="background: #7b68ee50;">
+          <h3>Mathletics — <i>Fondateur</i></h3>
+          <p>Site éducatif proposant des quiz sur les algorithmes, la programmation et les mathématiques. L’objectif est d’aider les étudiants à progresser de manière interactive.</p>
+        </div>
+        <div class="card" style="background: #7b68ee50;">
+          <h3>Quotiva — <i>Créateur & Développeur</i></h3>
+          <p>Site de citations inspirantes pour motiver les étudiants et développeurs. Pensé pour une expérience simple, esthétique et motivante.</p>
+        </div>
+        <div class="card" style="background: #7b68ee50;">
+          <h3>Timeastore — <i>Créateur de marque</i></h3>
+          <p>Boutique en ligne spécialisée dans la vente de montres, bracelets et bagues. Livraison dans les 58 wilayas d’Algérie. Conception complète du branding et du site.</p>
+        </div>
+        <div class="card" style="background: #7b68ee50;">
+          <h3>Clothify AE — <i>Fondateur & Designer</i></h3>
+          <p>Marque de vêtements moderne, alliant style et qualité. Gestion du branding, du marketing digital, et de la stratégie commerciale.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" aria-label="Formulaire de contact">
+      <h2 class="section-title"><i class="bx bx-mail-send"></i> Contact</h2>
+      <form class="contact-form" action="https://formsubmit.co/c52077e04ddf546f93237c6e80b7ebd1" method="POST">
+        <input type="text" name="name" placeholder="Votre nom" required />
+        <input type="email" name="email" placeholder="Votre email" required />
+        <textarea name="message" rows="5" placeholder="Votre message" required></textarea>
+        <button type="submit">Envoyer</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+    <div class="footer-left">
+      <h3>Rayan Remili</h3>
+      <p>Développeur passionné | Créateur de solutions modernes</p>
+    </div>
+    <div class="footer-center">
+      <nav>
+        <a href="#home">Accueil</a>
+        <a href="#about">À propos</a>
+        <a href="#skills">Compétences</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-right">
+      <p>© 2025 Rayan Remili. Tous droits réservés.</p>
+      <div class="social-icons">
+        <a href="https://wa.me/+213559387068" target="_blank" rel="noopener" style="color: inherit; margin: 0 0.5rem;">
+          <i class="bx bxl-whatsapp"></i>
+        </a>
+        <a href="https://www.facebook.com/rayan.rm.977308" target="_blank" rel="noopener" style="color: inherit; margin: 0 0.5rem;">
+          <i class="bx bxl-facebook"></i>
+        </a>
+        <a href="mailto:rmrayan04@gmail.com" aria-label="Email">
+          <i class="bx bx-envelope"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  <script>
+    // Light / Dark Mode Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('light');
+      if(body.classList.contains('light')) {
+        themeToggle.classList.replace('bx-moon', 'bx-sun');
+      } else {
+        themeToggle.classList.replace('bx-sun', 'bx-moon');
+      }
+    });
+
+    // Header shadow on scroll
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
+</body>
+</html>
