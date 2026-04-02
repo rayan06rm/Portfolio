@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Créer une marque de vêtements à 18 ans - Rayan Remili</title>
+  <meta name="description" content="Branding, fournisseurs, réseaux sociaux, premières ventes : l'histoire complète derrière Clothify AE." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --accent: #5263ff; --accent-light: rgba(82,99,255,0.12); --accent-border: rgba(82,99,255,0.3); --accent-soft: #a0aaff; --bg: #0f0f0f; --bg-card: rgba(255,255,255,0.03); --border: rgba(255,255,255,0.06); --border-hover: rgba(82,99,255,0.4); --text: #ffffff; --text-muted: rgba(255,255,255,0.55); --text-dim: rgba(255,255,255,0.35); --text-faint: rgba(255,255,255,0.2); --radius: 12px; --radius-sm: 6px; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.65; min-height: 100vh; }
+    a { text-decoration: none; color: inherit; }
+    #progress-bar { position: fixed; top: 0; left: 0; height: 2px; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent-soft)); z-index: 200; transition: width 0.05s linear; }
+    .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; height: 56px; background: rgba(15,15,15,0.88); backdrop-filter: blur(16px); border-bottom: 0.5px solid var(--border); transition: border-color 0.3s; }
+    .navbar.scrolled { border-bottom-color: rgba(82,99,255,0.15); }
+    .nav-logo { color: var(--accent); font-size: 17px; font-weight: 600; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { color: var(--text-muted); font-size: 13px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--accent); }
+    .nav-cta { background: var(--accent); color: #fff; border: none; border-radius: var(--radius-sm); padding: 7px 16px; font-size: 12px; font-weight: 500; cursor: pointer; font-family: 'Inter', sans-serif; transition: opacity 0.2s; display: inline-flex; align-items: center; gap: 5px; }
+    .nav-cta:hover { opacity: 0.88; }
+    .hamburger { display: none; background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; }
+    .mobile-nav { display: none; flex-direction: column; position: fixed; top: 56px; left: 0; right: 0; background: rgba(15,15,15,0.97); border-bottom: 0.5px solid var(--border); backdrop-filter: blur(20px); z-index: 99; padding: 12px 16px 16px; gap: 2px; }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { display: block; padding: 10px 14px; color: var(--text-muted); font-size: 13px; border-radius: var(--radius-sm); transition: background 0.15s, color 0.15s; }
+    .mobile-nav a:hover { background: var(--accent-light); color: var(--accent); }
+    #back-top { position: fixed; bottom: 28px; right: 28px; width: 38px; height: 38px; background: var(--accent-light); border: 0.5px solid var(--accent-border); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: var(--accent-soft); font-size: 17px; cursor: pointer; z-index: 90; opacity: 0; transform: translateY(12px); transition: opacity 0.3s, transform 0.3s; pointer-events: none; }
+    #back-top.visible { opacity: 1; transform: translateY(0); pointer-events: all; }
+    #back-top:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .page { max-width: 720px; margin: 0 auto; padding: 92px 32px 80px; }
+    .back-link { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; color: var(--text-dim); margin-bottom: 40px; transition: color 0.2s; }
+    .back-link:hover { color: var(--accent); }
+    .article-header { margin-bottom: 48px; padding-bottom: 36px; border-bottom: 0.5px solid var(--border); }
+    .article-topic { display: inline-flex; font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 20px; margin-bottom: 18px; background: rgba(251,191,36,0.1); color: #fbbf24; }
+    .article-title { font-size: 30px; font-weight: 500; color: var(--text); line-height: 1.25; letter-spacing: -0.5px; margin-bottom: 16px; }
+    .article-excerpt { font-size: 16px; color: var(--text-muted); line-height: 1.75; font-weight: 300; margin-bottom: 24px; }
+    .article-meta { display: flex; align-items: center; gap: 18px; font-size: 12px; color: var(--text-dim); flex-wrap: wrap; }
+    .author-chip { display: flex; align-items: center; gap: 8px; }
+    .author-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #5263ff, #8b97ff); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; color: #fff; }
+    .meta-item { display: flex; align-items: center; gap: 5px; }
+    .meta-sep { width: 3px; height: 3px; background: var(--text-faint); border-radius: 50%; }
+    .article-body { color: rgba(255,255,255,0.78); }
+    .article-body h2 { font-size: 21px; font-weight: 500; color: var(--text); margin: 40px 0 14px; letter-spacing: -0.3px; }
+    .article-body h3 { font-size: 16px; font-weight: 500; color: var(--text); margin: 28px 0 10px; }
+    .article-body p { font-size: 15px; line-height: 1.85; margin-bottom: 20px; color: rgba(255,255,255,0.72); font-weight: 300; }
+    .article-body p strong { font-weight: 500; color: var(--text); }
+    .article-body ul, .article-body ol { margin: 0 0 20px 22px; }
+    .article-body li { font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.72); margin-bottom: 8px; font-weight: 300; }
+    .article-body li strong { font-weight: 500; color: var(--text); }
+    .article-body a { color: var(--accent); border-bottom: 1px solid rgba(82,99,255,0.3); transition: border-color 0.2s; }
+    .article-body a:hover { border-color: var(--accent); }
+    .callout { background: rgba(251,191,36,0.08); border: 0.5px solid rgba(251,191,36,0.25); border-left: 3px solid #fbbf24; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 14px 18px; margin: 24px 0; }
+    .callout p { margin: 0 !important; color: #fbbf24 !important; font-size: 14px !important; line-height: 1.6 !important; }
+    .divider { border: none; border-top: 0.5px solid var(--border); margin: 40px 0; }
+    .article-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 36px; }
+    .article-tag { font-size: 12px; padding: 5px 12px; border-radius: var(--radius-sm); background: var(--bg-card); color: var(--text-dim); border: 0.5px solid var(--border); transition: border-color 0.2s, color 0.2s; }
+    .article-tag:hover { border-color: var(--accent-border); color: var(--accent-soft); }
+    .author-card { background: var(--bg-card); border: 0.5px solid rgba(255,255,255,0.07); border-radius: var(--radius); padding: 22px 24px; display: flex; gap: 18px; align-items: flex-start; margin-bottom: 40px; }
+    .author-card-avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #5263ff, #8b97ff); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 600; color: #fff; flex-shrink: 0; }
+    .author-card-name { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 5px; }
+    .author-card-bio { font-size: 13px; color: var(--text-muted); line-height: 1.65; font-weight: 300; }
+    .author-card-link { display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; font-size: 12px; color: var(--accent); transition: gap 0.2s; }
+    .author-card-link:hover { gap: 7px; }
+    .related-heading { font-size: 14px; font-weight: 500; color: var(--text-muted); margin-bottom: 14px; }
+    .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .related-card { background: var(--bg-card); border: 0.5px solid rgba(255,255,255,0.07); border-radius: var(--radius); padding: 18px; display: block; transition: border-color 0.2s; }
+    .related-card:hover { border-color: var(--border-hover); }
+    .related-topic { display: inline-flex; font-size: 10px; font-weight: 500; padding: 3px 9px; border-radius: 20px; margin-bottom: 9px; }
+    .related-card-title { font-size: 13px; font-weight: 500; color: var(--text); line-height: 1.45; margin-bottom: 9px; }
+    .related-meta { font-size: 11px; color: var(--text-faint); }
+    .site-footer { border-top: 0.5px solid var(--border); padding: 24px 32px; max-width: 720px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-logo { font-size: 15px; font-weight: 600; color: var(--accent); }
+    .footer-copy { font-size: 13px; color: var(--text-faint); }
+    @media (max-width: 700px) { .page { padding: 82px 20px 60px; } .navbar { padding: 0 20px; } .nav-links { display: none; } .nav-cta { display: none; } .hamburger { display: block; } .article-title { font-size: 24px; } .article-excerpt { font-size: 14px; } .related-grid { grid-template-columns: 1fr; } .site-footer { padding: 20px; } .author-card { flex-direction: column; gap: 12px; } }
+  </style>
+</head>
+<body>
+  <div id="progress-bar"></div>
+  <div id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="bx bx-chevron-up"></i></div>
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="nav-logo">Rayan</a>
+    <div class="nav-links">
+      <a href="index.html">Accueil</a>
+      <a href="index.html">Projets</a>
+      <a href="index.html">Parcours</a>
+      <a href="blog.html" class="active">Blog</a>
+      <a href="index.html">Contact</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <a href="cv-rayan-remili.pdf" download class="nav-cta"><i class="bx bx-download"></i> CV</a>
+      <button class="hamburger" id="hamburger"><i class="bx bx-menu" id="hamIcon"></i></button>
+    </div>
+  </nav>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html" onclick="closeMenu()">Accueil</a>
+    <a href="blog.html" onclick="closeMenu()">Blog</a>
+    <a href="index.html" onclick="closeMenu()">Contact</a>
+    <a href="cv-rayan-remili.pdf" download onclick="closeMenu()" style="margin-top:6px;background:var(--accent);color:#fff;text-align:center;font-weight:500;border-radius:var(--radius-sm);">Télécharger CV</a>
+  </div>
+
+  <main class="page">
+    <a href="blog.html" class="back-link"><i class="bx bx-arrow-back"></i> Retour au blog</a>
+
+    <div class="article-header">
+      <div class="article-topic">Entrepreneuriat</div>
+      <h1 class="article-title">Créer une marque de vêtements à 18 ans : ce que personne ne te dit</h1>
+      <p class="article-excerpt">Branding, fournisseurs, réseaux sociaux, premières ventes — l'histoire complète et sans filtre derrière Clothify AE.</p>
+      <div class="article-meta">
+        <div class="author-chip"><img src="photo.jpg" alt="Rayan Remili" style="width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0;" /><span>Rayan Remili</span></div>
+        <span class="meta-sep"></span>
+        <div class="meta-item"><i class="bx bx-calendar" style="font-size:13px"></i> 2 février 2025</div>
+        <span class="meta-sep"></span>
+        <div class="meta-item"><i class="bx bx-time" style="font-size:13px"></i> 7 min de lecture</div>
+      </div>
+    </div>
+
+    <div class="article-body">
+
+      <h2>Pourquoi une marque de vêtements ?</h2>
+      <p>En 2022, j'avais 17 ans, beaucoup d'énergie et une idée fixe : créer quelque chose de concret, pas juste apprendre. Le e-commerce me fascinait. J'avais regardé des dizaines de vidéos sur le dropshipping, les marques print-on-demand, les stratégies Instagram. Un jour j'ai décidé d'arrêter de regarder et de faire.</p>
+      <p>Clothify AE est né de là — une marque de vêtements moderne, pensée pour le marché algérien, avec une identité visuelle soignée et une vraie stratégie commerciale derrière.</p>
+
+      <div class="callout">
+        <p>💡 La différence entre regarder des vidéos sur l'entrepreneuriat et lancer quelque chose, c'est une décision. Juste une.</p>
+      </div>
+
+      <h2>L'identité de marque d'abord</h2>
+      <p>La première erreur que font beaucoup de gens, c'est de commencer par le produit. Moi j'ai commencé par la marque. Avant de commander quoi que ce soit, j'ai passé des heures à définir :</p>
+      <ul>
+        <li><strong>Le nom</strong> — Clothify AE. Court, moderne, mémorable. Le "AE" pour Algeria/Algérie.</li>
+        <li><strong>La palette de couleurs</strong> — sobres, premium, intemporelles. Pas de couleurs criardes.</li>
+        <li><strong>Le ton de communication</strong> — proche, authentique, sans chichi.</li>
+        <li><strong>La cible</strong> — jeunes algériens 16-28 ans qui veulent du style sans payer des prix européens.</li>
+      </ul>
+      <p>Ce travail en amont m'a tout simplifié par la suite. Chaque décision — photo produit, texte de publication, réponse client — était guidée par cette identité.</p>
+
+      <h2>Les galères que personne ne montre</h2>
+      <h3>Trouver des fournisseurs fiables</h3>
+      <p>C'est là que beaucoup abandonnent. En Algérie, la chaîne d'approvisionnement n'est pas aussi simple qu'en Europe. J'ai contacté plusieurs dizaines de fournisseurs. Certains ne répondaient pas, d'autres avaient des délais impossibles, d'autres encore livraient de la qualité médiocre. <strong>Il faut commander des échantillons. Toujours.</strong></p>
+
+      <h3>La livraison dans 58 wilayas</h3>
+      <p>Promettre la livraison partout en Algérie, c'est facile à écrire sur un site. Le réaliser, c'est autre chose. J'ai dû trouver un partenaire logistique fiable, gérer les retards, gérer les colis perdus, gérer les clients mécontents. Ça m'a appris la gestion de crise plus vite que n'importe quel cours.</p>
+
+      <h3>Le marketing organique sans budget</h3>
+      <p>Je n'avais pas d'argent pour de la pub payante au départ. J'ai tout misé sur le contenu organique Instagram — publications régulières, stories, reels, réponses aux commentaires. Le premier mois : 47 abonnés. Le troisième mois : plus de 800. La croissance est lente mais les clients qui viennent de cette façon sont bien plus fidèles.</p>
+
+      <h2>Ce que j'ai vraiment appris</h2>
+      <ul>
+        <li><strong>Le branding n'est pas optionnel.</strong> Un produit sans identité est un produit générique. Le branding justifie le prix et crée la fidélité.</li>
+        <li><strong>La relation client est un avantage compétitif.</strong> Répondre vite, être honnête en cas de problème, surprendre positivement — ça transforme un acheteur en ambassadeur.</li>
+        <li><strong>Les réseaux sociaux sont un travail à plein temps.</strong> Pas dans le sens négatif, mais il faut être régulier, consistant, et patient.</li>
+        <li><strong>Échouer sur un produit n'est pas échouer sur la marque.</strong> J'ai eu des références qui ne se vendaient pas. J'ai appris, pivoté, et continué.</li>
+      </ul>
+
+      <h2>Est-ce que ça valait le coup ?</h2>
+      <p>Oui — pas forcément pour l'argent gagné (qui était modeste pour un début), mais pour tout ce que j'ai appris. La gestion, la vente, le design, la logistique, la communication client. Des choses qu'aucune école ne m'aurait enseignées aussi concrètement.</p>
+      <p>Et puis il y a ce sentiment indescriptible quand quelqu'un porte quelque chose que tu as créé. Ça, ça ne s'achète pas.</p>
+
+    </div>
+
+    <hr class="divider" />
+    <div class="article-tags">
+      <span class="article-tag">Entrepreneuriat</span>
+      <span class="article-tag">Branding</span>
+      <span class="article-tag">E-commerce</span>
+      <span class="article-tag">Marketing</span>
+      <span class="article-tag">Algérie</span>
+    </div>
+
+    <div class="author-card">
+      <img src="photo.jpg" alt="Rayan Remili" style="width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0;" />
+      <div>
+        <div class="author-card-name">Rayan Remili</div>
+        <div class="author-card-bio">Étudiant en Double Licence Informatique & Mathématiques à la Sorbonne Paris Nord. Bachelier maths 17,85/20, fondateur de Clothify AE et NextStage.</div>
+        <a href="index.html" class="author-card-link">Voir le portfolio <i class="bx bx-chevron-right"></i></a>
+      </div>
+    </div>
+
+    <div class="related-heading">Articles similaires</div>
+    <div class="related-grid">
+      <a href="blog-nextstage.html" class="related-card">
+        <div class="related-topic" style="background:var(--accent-light);color:var(--accent-soft);">Dev Web</div>
+        <div class="related-card-title">Comment j'ai construit NextStage en 2 semaines sans framework</div>
+        <div class="related-meta">15 mars 2025 · 5 min</div>
+      </a>
+      <a href="blog-design-erreurs.html" class="related-card">
+        <div class="related-topic" style="background:rgba(236,72,153,0.1);color:#f472b6;">UI/UX</div>
+        <div class="related-card-title">Les 5 erreurs de design que j'ai faites</div>
+        <div class="related-meta">20 jan. 2025 · 4 min</div>
+      </a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <a href="index.html" class="footer-logo">Rayan</a>
+    <p class="footer-copy">© 2025 Rayan Remili. Tous droits réservés.</p>
+  </footer>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      const s = window.scrollY, t = document.documentElement.scrollHeight - window.innerHeight;
+      document.getElementById('progress-bar').style.width = (t > 0 ? (s/t)*100 : 0) + '%';
+      document.getElementById('navbar').classList.toggle('scrolled', s > 10);
+      document.getElementById('back-top').classList.toggle('visible', s > 300);
+    });
+    document.getElementById('hamburger').addEventListener('click', () => {
+      const open = document.getElementById('mobileNav').classList.toggle('open');
+      document.getElementById('hamIcon').className = open ? 'bx bx-x' : 'bx bx-menu';
+    });
+    function closeMenu() { document.getElementById('mobileNav').classList.remove('open'); document.getElementById('hamIcon').className = 'bx bx-menu'; }
+  </script>
+</body>
+</html>
